@@ -5,6 +5,8 @@ const burger = {name: "Burger", price: 18, category: "Lunch"};
 const breakfastBurrito = {name: "Breakfast Burrito", price: 16, category:"Breakfast"};
 
 /* Task 1a: write a function to return more menu items with the same format as the items above. */
+let onTheMenu = [];
+onTheMenu.push(latte, burger, breakfastBurrito);
 
 function createMenuItem(name, cost, category){
   let obj = {
@@ -13,6 +15,7 @@ function createMenuItem(name, cost, category){
     category: category,
     
   }
+  onTheMenu.push(obj);
   return obj;
 }
 
@@ -20,7 +23,7 @@ function createMenuItem(name, cost, category){
 createMenuItem("Orange Juice", 4, "Drinks");
 createMenuItem("Hash Browns", 4, "Breakfast");
 createMenuItem("Hot Dog", 6, "Lunch");
-
+console.log(onTheMenu);
 
 /* Task 2: You're having a lunch special! 25% off for teachers and students, 10% off for everyone else. Add a method to your burger object that automatically calculates price given a string as a parameter. 
 
@@ -40,7 +43,8 @@ burger.discount = function discount(type){
   }
   return this.price * percentage;
 }
-
+console.log(burger);
+console.log(burger.discount("teacher")); // 13.5
 ///////////////Reviews (MVP)///////////////////
 
 const reviews = [{name: "Daniela", rating: 5, feedback:"Beautiful atmosphere and wonderful vegan options!"},
@@ -58,9 +62,11 @@ console.log(reviews[5].feedback);
 
 /* Task 4: Add a new rating with your (fictitious) opinions of the restaurant in the same format as the reviews above. */
 reviews.push({name: "Gabriel", rating: 5, feedback:"the food here is amazing!"});
+console.log(reviews);// my review appears
 
 /* Task 5: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"*/
 reviews[7].feedback = "this place is chill with really cool people, great for getting work done on weekdays";
+console.log(reviews);// it updated
 /*  Task 6: Write a function to return a review based on the index of the review in the array.
 
  Your function should take two arguments:
@@ -76,7 +82,7 @@ and should return a string in the format `{name} gave the restaurant a {rating},
 function getReviewByIndex(array, index) {
     return `${array[index].name} gave the restaurant a ${array[index].rating} star review and their feedback was: ${array[index].feedback}`;
   }
-  
+console.log(getReviewByIndex(reviews, 0));  
 
 /* Task 7: Write a function to get information about the most recent review called `getLastReview`
 
@@ -90,9 +96,11 @@ For example, if getLastReview is invoked passing the reviews array it will retur
 function getLastReview(array) {
   return `${array[array.length-1].name} gave the restaurant a ${array[array.length-1].rating} star review and their feedback was: ${array[array.length-1].feedback}`;
   } 
-
+console.log(getLastReview(reviews));// yes my review is last on the list
 
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
+
+/*** NOTE! I DID ATTEMPT THE LAST STRETCH GOAL! ***/
 
 /** STRETCH 1: Write a function called `getReviewByRating` that returns an array containing all reviews in a certain range. Your function should accept: 
 
@@ -147,7 +155,27 @@ The returned object should have the following characteristics:
 */
 
 
-function carMaker(/* code here */) {
-    /* code here */
-    
+function carMaker(odometer) {
+  let obj = {
+    odometer: odometer,
+    drive: function(distance) {
+      this.odometer += distance;
+      return this.odometer;
+      }
+  }
+  return obj;
 }
+
+/* creation of car1 with 100 miles on it*/
+let car1 = carMaker(100);
+console.log(car1);
+
+/*car1 drives another 100 miles*/
+car1.drive(100);
+console.log(car1);
+/*and another 100 miles*/
+car1.drive(100);
+console.log(car1);
+/* let's make another car with no miles*/
+let car2 = carMaker(0);
+console.log(car2);
